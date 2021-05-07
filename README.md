@@ -1,5 +1,2 @@
 # Learning stuff and things
-#Still trying to figure this the fuck out.
-#Another line 
-#And finally one more 
-#last one
+#I think I'm kinda getting the hang of this. This is an edit that will push directly.
