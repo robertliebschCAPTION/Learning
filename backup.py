@@ -75,25 +75,6 @@ class Atlassian:
                     file_.write(chunk)
         print(file_path)
 
-    def stream_to_s3(self, url, remote_filename):
-        print('-> Streaming to S3')
-
-        if self.config['UPLOAD_TO_S3']['AWS_ACCESS_KEY'] == '':
-            connect = boto.connect_s3()
-        else:
-            connect = boto.connect_s3(
-                aws_access_key_id=self.config['UPLOAD_TO_S3']['AWS_ACCESS_KEY'], 
-                aws_secret_access_key=self.config['UPLOAD_TO_S3']['AWS_SECRET_KEY']
-                )
-
-        bucket = connect.get_bucket(self.config['UPLOAD_TO_S3']['S3_BUCKET'])
-        r = self.session.get(url, stream=True)
-        if r.status_code == 200:
-            k = Key(bucket)
-            k.key = remote_filename
-            k.content_type = r.headers['content-type']
-            k.set_contents_from_string(r.content)
-            return
 
 
 if __name__ == '__main__':
@@ -121,6 +102,4 @@ if __name__ == '__main__':
     if config['DOWNLOAD_LOCALLY'] == 'true':
         atlass.download_file(backup_url, file_name)
 
-    if config['UPLOAD_TO_S3']['S3_BUCKET'] != '':
-        atlass.stream_to_s3(backup_url, file_name)
 
