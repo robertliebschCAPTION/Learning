@@ -102,4 +102,4 @@ if __name__ == '__main__':
     if config['DOWNLOAD_LOCALLY'] == 'true':
         atlass.download_file(backup_url, file_name)
 
-
+echo "SUCCESS"
