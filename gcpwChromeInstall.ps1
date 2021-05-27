@@ -116,3 +116,13 @@ else {
     $msgResult = [System.Windows.MessageBox]::Show('Could not write to registry. Configuration was not completed.', 'Enrollment', 'OK', 'Error')
 
 }
+<# download Google Drive FileStream Setup from https://dl.google.com/drive-file-stream/GoogleDriveFSSetup.exe #>
+$gdfsUrlPrefix = 'https://dl.google.com/drive-file-stream/'
+$gdfsFileName = 'GoogleDriveFSSetup.exe'
+$gdfsUri = $gdfsUrlPrefix + $gdfsFileName
+Write-Host 'Downloading GoogleDrive from' $gdfsUri
+Invoke-WebRequest -Uri $gdfsUri -OutFile $gdfsFileName
+<# Install Google Drive File Stream #>
+GoogleDriveFSSetup --silent --gsuite_shortcuts=false --desktop_shortcut
+
+<#Enable BitLockewr#>
